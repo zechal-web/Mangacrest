@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Crest - منصة المانهوا</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { cairo: ['Cairo', 'sans-serif'] },
+                    colors: {
+                        darkBg: '#0f0a1a',
+                        darkCard: '#1a1025',
+                        purplePrimary: '#8b5cf6',
+                        purpleHover: '#7c3aed',
+                        purpleLight: '#c4b5fd'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #0f0a1a; color: #e5e7eb; }
+        .hidden-view { display: none; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1025; }
+        ::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-200">
+
+    <!-- شريط التنقل العُلوي -->
+    <nav class="bg-darkCard border-b border-purplePrimary/30 shadow-[0_4px_15px_rgba(139,92,246,0.15)] p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purplePrimary to-purpleLight cursor-pointer" onclick="showView('home-view')">
+                Manga Crest
+            </h1>
+            
+            <div class="flex gap-3 sm:gap-4 items-center">
+                <!-- زر قناة التليجرام -->
+                <a href="https://t.me/+VYgX581p6N5kN2E8" target="_blank" class="flex items-center gap-2 text-purpleLight hover:text-white transition-colors bg-purplePrimary/10 hover:bg-purplePrimary/20 px-3 py-2 rounded-lg border border-purplePrimary/30">
+                    <svg class="w-5 h-5 text-[#2AABEE]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.18-.08-.05-.19-.02-.27 0-.11.03-1.88 1.2-3.3 2.16-.21.14-.39.21-.56.2-.18-.01-.52-.1-.77-.18-.3-.1-.54-.15-.52-.32.01-.09.13-.18.36-.28 1.41-.61 2.82-1.22 4.25-1.84 1.34-.58 2.67-1.15 4-1.72.19-.08.35-.11.47-.11.17 0 .32.05.42.16.08.09.11.23.08.42z"/></svg>
+                    <span class="text-sm font-bold hidden sm:block">قناة التليجرام</span>
+                </a>
+
+                <!-- منطقة أزرار الدخول والحساب -->
+                <div id="nav-actions" class="flex gap-2 items-center">
+                    <button onclick="showView('login-view')" class="bg-purplePrimary hover:bg-purpleHover px-4 py-2 rounded-lg transition-colors font-semibold text-sm">
+                        تسجيل الدخول
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="container mx-auto p-4 mt-6">
+
+        <!-- 1. الصفحة الرئيسية (عرض المانهوا) -->
+        <div id="home-view" class="view-section">
+            <h2 class="text-xl font-bold mb-6 border-r-4 border-purplePrimary pr-2">آخر التحديثات</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4" id="manga-grid">
+                <!-- سيتم توليد المانهوا هنا برمجياً للتجربة -->
+            </div>
+        </div>
+
+        <!-- 2. صفحة تسجيل الدخول -->
+        <div id="login-view" class="view-section hidden-view max-w-md mx-auto bg-darkCard p-8 rounded-xl border border-purplePrimary/20 shadow-2xl mt-10">
+            <h2 class="text-2xl font-bold text-center mb-6 text-purpleLight">تسجيل الدخول</h2>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm mb-1 text-gray-400">البريد الإلكتروني</label>
+                    <input type="email" id="login-email" class="w-full bg-darkBg border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-purplePrimary" placeholder="zechal510010@gmail.com" value="zechal510010@gmail.com">
+                </div>
+                <div>
+                    <label class="block text-sm mb-1 text-gray-400">كلمة المرور</label>
+                    <input type="password" id="login-pass" class="w-full bg-darkBg border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-purplePrimary" value="01228124879A#">
+                </div>
+                <button onclick="handleLogin()" class="w-full bg-purplePrimary hover:bg-purpleHover py-3 rounded-lg font-bold transition-all mt-4">
+                    دخول
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. لوحة تحكم الإدارة (تظهر للإدارة فقط) -->
+        <div id="admin-view" class="view-section hidden-view">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-purpleLight">لوحة التحكم السارية (الفريق)</h2>
+                <span id="admin-role-badge" class="bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm border border-red-500/50">المدير الأعلى</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- إضافة مانهوا / فصول -->
+                <div class="bg-darkCard p-6 rounded-xl border border-gray-800">
+                    <h3 class="font-bold mb-4 border-b border-gray-700 pb-2">رفع فصل جديد</h3>
+                    <input type="text" placeholder="اسم المانهوا" class="w-full bg-darkBg border border-gray-700 rounded p-2 mb-3 text-white">
+                    <input type="number" placeholder="رقم الفصل" class="w-full bg-darkBg border border-gray-700 rounded p-2 mb-3 text-white">
+                    <label class="block text-sm text-gray-400 mb-2">صور الفصل (رفع متعدد)</label>
+                    <input type="file" multiple class="w-full bg-darkBg border border-gray-700 rounded p-2 mb-4 text-white">
+                    <button class="w-full bg-green-600 hover:bg-green-500 py-2 rounded font-bold transition-colors">نشر الفصل</button>
+                </div>
+
+                <!-- إدارة الصلاحيات -->
+                <div class="bg-darkCard p-6 rounded-xl border border-gray-800" id="role-management">
+                    <!-- سيتم إضافة محتوى إدارة الطاقم هنا برمجياً للمدير الأعلى -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. ملف القارئ (رتب الزراعة) -->
+        <div id="profile-view" class="view-section hidden-view bg-darkCard p-8 rounded-xl border border-purplePrimary/20 mt-6 text-center">
+            <div class="w-24 h-24 bg-gradient-to-tr from-purplePrimary to-purpleLight rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold shadow-[0_0_20px_rgba(139,92,246,0.4)]">
+                <span id="profile-avatar-letter">ز</span>
+            </div>
+            <h2 id="profile-email" class="text-xl font-bold text-white mb-2">user@example.com</h2>
+            
+            <div class="inline-block bg-darkBg border border-purplePrimary/50 px-6 py-3 rounded-lg mt-4">
+                <p class="text-gray-400 text-sm mb-1">عالم الزراعة الحالي</p>
+                <p id="cultivation-rank" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">
+                    مبتدئ
+                </p>
+            </div>
+            
+            <div class="mt-6 flex justify-center gap-8 text-center">
+                <div>
+                    <p class="text-gray-500 text-sm">الفصول المقروءة</p>
+                    <p id="read-chapters" class="text-xl font-bold">0</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- استدعاء مكتبة Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        // 1. إعداد الاتصال بقاعدة البيانات 
+        const supabaseUrl = 'https://tumtlkfcwetvhoemknre.supabase.co'; 
+        const supabaseKey = 'sb_publishable_UkCMglScSgbkgxG0ooezJw_LypynpLJ';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // --- نظام رتب الزراعة ---
+        function getCultivationRank(chapters) {
+            if (chapters >= 5000) return { name: "الإمبراطور الخالد", color: "from-red-500 to-yellow-500" };
+            if (chapters >= 1000) return { name: "ملك خالد", color: "from-yellow-400 to-yellow-200" };
+            if (chapters >= 500) return { name: "تكوين الروح", color: "from-purple-400 to-pink-500" };
+            if (chapters >= 250) return { name: "النواة الذهبية", color: "from-yellow-500 to-orange-500" };
+            if (chapters >= 100) return { name: "تأسيس الأساس", color: "from-green-400 to-emerald-600" };
+            if (chapters >= 50) return { name: "صقل الطاقة الحيوية", color: "from-blue-400 to-cyan-500" };
+            return { name: "بشري (مبتدئ)", color: "from-gray-400 to-gray-200" };
+        }
+
+        let currentUser = null;
+
+        function showView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden-view'));
+            document.getElementById(viewId).classList.remove('hidden-view');
+        }
+
+        // --- تسجيل الدخول عبر قاعدة البيانات ---
+        async function handleLogin() {
+            const emailInput = document.getElementById('login-email').value.trim();
+            const passInput = document.getElementById('login-pass').value;
+
+            // جلب بيانات المستخدم من Supabase
+            const { data: user, error } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('email', emailInput)
+                .single();
+
+            if (user) {
+                // التأكد من الباسورد للمدير الأعلى لتأمين الحساب
+                if (emailInput === 'zechal510010@gmail.com' && passInput !== '01228124879A#') {
+                    alert("كلمة المرور غير صحيحة للمدير الأعلى!");
+                    return;
+                }
+
+                currentUser = {
+                    email: user.email,
+                    role: user.role,
+                    readChapters: user.read_chapters
+                };
+
+                updateNavbar();
+                showView('home-view');
+            } else {
+                alert("الحساب غير موجود في قاعدة البيانات! تأكد من البريد الإلكتروني أو قم بإضافته من لوحة التحكم.");
+            }
+        }
+
+        function updateNavbar() {
+            const navActions = document.getElementById('nav-actions');
+            if (currentUser) {
+                let adminBtn = '';
+                if (['supreme_admin', 'admin', 'editor', 'cleaner'].includes(currentUser.role)) {
+                    adminBtn = `<button onclick="setupAdminView(); showView('admin-view')" class="bg-gray-800 hover:bg-gray-700 text-purpleLight px-3 py-1.5 rounded-lg text-sm border border-gray-700 mr-2">لوحة التحكم</button>`;
+                }
+
+                navActions.innerHTML = `
+                    ${adminBtn}
+                    <button onclick="setupProfile(); showView('profile-view')" class="flex items-center gap-2 bg-darkBg border border-purplePrimary/30 px-3 py-1.5 rounded-lg hover:border-purplePrimary transition-colors">
+                        <div class="w-6 h-6 rounded-full bg-purplePrimary flex items-center justify-center text-xs font-bold text-white">${currentUser.email.charAt(0).toUpperCase()}</div>
+                        <span class="text-sm truncate max-w-[90px] hidden sm:block">${currentUser.email.split('@')[0]}</span>
+                    </button>
+                    <button onclick="logout()" class="text-red-400 hover:text-red-300 text-sm mr-2 font-bold">خروج</button>
+                `;
+            } else {
+                navActions.innerHTML = `<button onclick="showView('login-view')" class="bg-purplePrimary hover:bg-purpleHover px-4 py-2 rounded-lg transition-colors font-semibold text-sm">تسجيل الدخول</button>`;
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            updateNavbar();
+            showView('home-view');
+        }
+
+        function setupProfile() {
+            document.getElementById('profile-email').textContent = currentUser.email;
+            document.getElementById('profile-avatar-letter').textContent = currentUser.email.charAt(0).toUpperCase();
+            document.getElementById('read-chapters').textContent = currentUser.readChapters;
+            
+            const rank = getCultivationRank(currentUser.readChapters);
+            const rankEl = document.getElementById('cultivation-rank');
+            rankEl.textContent = rank.name;
+            rankEl.className = `text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${rank.color}`;
+        }
+
+        // --- تحديث أو إضافة الرتب من داخل لوحة التحكم ---
+        async function updateStaffRole() {
+            const targetEmail = document.getElementById('staff-email').value.trim();
+            const newRole = document.getElementById('staff-role').value;
+
+            if (!targetEmail) return alert("أدخل بريد العضو");
+
+            // أمر يسمح بإضافة حساب جديد إذا لم يكن موجوداً أو تحديث رتبته إذا كان موجوداً
+            const { data, error } = await supabase
+                .from('profiles')
+                .upsert({ email: targetEmail, role: newRole, read_chapters: 0 }, { onConflict: 'email' });
+
+            if (error) {
+                alert("حدث خطأ أثناء تحديث الرتبة. تأكد من فتح الصلاحيات (Row Level Security) في Supabase.");
+                console.error(error);
+            } else {
+                alert(`تم تعيين / تحديث رتبة ${targetEmail} بنجاح!`);
+            }
+        }
+
+        function setupAdminView() {
+            const roleBadge = document.getElementById('admin-role-badge');
+            const roleMgmt = document.getElementById('role-management');
+            
+            if(currentUser.role === 'supreme_admin') {
+                roleBadge.textContent = "المدير الأعلى";
+                roleBadge.className = "bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm border border-red-500/50 font-bold";
+                roleMgmt.style.display = "block"; 
+                
+                roleMgmt.innerHTML = `
+                    <h3 class="font-bold mb-4 border-b border-gray-700 pb-2">تعيين الطاقم (إضافة أو تعديل)</h3>
+                    <input type="email" id="staff-email" placeholder="بريد العضو (لإضافته أو تعديله)" class="w-full bg-darkBg border border-gray-700 rounded p-2 mb-3 text-white">
+                    <select id="staff-role" class="w-full bg-darkBg border border-gray-700 rounded p-2 mb-4 text-white outline-none">
+                        <option value="admin">أدمن (مدير)</option>
+                        <option value="editor">محرر</option>
+                        <option value="cleaner">مبيض</option>
+                        <option value="reader">قارئ عادي</option>
+                    </select>
+                    <button onclick="updateStaffRole()" class="w-full bg-purplePrimary hover:bg-purpleHover py-2 rounded font-bold transition-colors">إضافة / تحديث الرتبة</button>
+                `;
+            } else {
+                if (currentUser.role === 'admin') {
+                    roleBadge.textContent = "أدمن";
+                    roleBadge.className = "bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm border border-purple-500/50 font-bold";
+                } else if (currentUser.role === 'editor') {
+                    roleBadge.textContent = "محرر";
+                    roleBadge.className = "bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm border border-blue-500/50 font-bold";
+                } else if (currentUser.role === 'cleaner') {
+                    roleBadge.textContent = "مبيض";
+                    roleBadge.className = "bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm border border-green-500/50 font-bold";
+                }
+                roleMgmt.style.display = "none";
+            }
+        }
+
+        // توليد واجهة الفصول الوهمية في الصفحة الرئيسية
+        window.onload = () => {
+            const grid = document.getElementById('manga-grid');
+            for(let i=1; i<=10; i++) {
+                grid.innerHTML += `
+                    <div class="bg-darkCard rounded-lg overflow-hidden border border-gray-800 hover:border-purplePrimary/50 transition-all cursor-pointer group">
+                        <div class="h-48 bg-gray-800 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-darkCard to-transparent z-10"></div>
+                            <img src="https://via.placeholder.com/200x300/2d1b4e/a78bfa?text=Manga+${i}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-3">
+                            <h3 class="font-bold text-sm mb-1 truncate">مانهوا ${i}</h3>
+                            <p class="text-xs text-purpleLight">الفصل 12${i}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        };
+    </script>
+</body>
+</html>
